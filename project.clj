@@ -18,7 +18,12 @@
                  ]
   :main ^:skip-aot humidor-server.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:uberjar {:aot :all}
+             :test {:dependencies [
+                                   [ring/ring-mock "0.3.0"]
+                                   ]}
+             
+             }
   
   :plugins [
             [no-man-is-an-island/lein-eclipse "2.0.0"]

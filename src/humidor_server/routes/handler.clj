@@ -9,7 +9,7 @@
   (:require [clj-json.core :as json] )
   (:require [ring.util.response :as response] )
   (:require [compojure.route :as route] )
-  
+   (:require [humidor-server.persistance.database :as database] )
   
   )
 
@@ -31,21 +31,19 @@
   (route/resources "/")
   (route/not-found "Page not found"))
 
-(defroutes arduino-test-route
+(defroutes arduino-route
   ;; route to test arduino connection
-  (POST "/arduinotest" [input]
-        (try
-          (do
-            (println input)
-            (json-response input)
-            )
-          (catch Exception e
-            (println "Caught an error: Cannot upload trees")
-            (json-response {"Error" "Cannot upload trees file"} (:invalid status-codes) )
-            ))))
+   (POST "/arduino" [h t]
+   
+         (println h t)
+  
+         (database/handle-upload [h t]) 
+          
+  )
+  )
 
 
 (def app
-  (-> (routes arduino-test-route home-route)
+  (-> (routes arduino-route home-route)
     wrap-json-params 
     ))

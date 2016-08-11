@@ -1,15 +1,33 @@
+;;
+;;---@fbielejec
+;;
+
 (ns humidor-server.core-test
   (:require [clojure.test :refer :all]
-            [humidor-server.core :refer :all]))
+            [ring.mock.request :as mock]
+            [clj-json.core :as json]
+            [humidor-server.routes.handler :as handler]
+            )
+  )
 
-(deftest a-test
-  (testing "test arduino route."
-    
+(deftest routes-test
+  (testing "/arduino route test."
            
-           (is (= 0 1))
-    
-    
-    )
+;         (println  (json/generate-string { :h 65 :t 21 }) )
+           
+(handler/app 
+                 (-> (mock/request
+                       :post
+                       "/arduino"
+                       (json/generate-string { :h 65 :t 21 }))
+                   
+                   (mock/content-type "application/json")
+                   
+                   )
+                 
+                 )
+           
+           )
   
   
   )
