@@ -2,21 +2,25 @@
 ;;---@fbielejec
 ;;
 
-(ns humidor-server.routes.handler
-  (:use compojure.core )
-  (:use ring.middleware.json-params )
-  (:use ring.middleware.params )
-  (:require [clj-json.core :as json] )
-  (:require [ring.util.response :as response] )
-  (:require [compojure.route :as route] )
-   (:require [humidor-server.persistance.database :as database] )
+(ns humidor-server.controller.routes-handler
+  
+  (:require [compojure.core :refer [routes defroutes GET POST]]
+            [ring.middleware.json :refer [wrap-json-params]]
+            [compojure.route :as route]
+            [ring.util.response :as response]
+            [clj-json.core :as json]
+            
+            [humidor-server.model.database :as database]
+            )
   
   )
+
 
 (def status-codes
   {:invalid 400
    :not-found 404
    :ok 200})
+
 
 (defn json-response [data & [status]]
   {
@@ -31,19 +35,14 @@
   (route/resources "/")
   (route/not-found "Page not found"))
 
+
 (defroutes arduino-route
   ;; route to test arduino connection
-   (POST "/arduino" [h t]
-   
-         (println h t)
-  
-         (database/handle-upload [h t]) 
-          
-  )
-  )
+  (POST "/arduino" [h t]
+        (json-response (database/insert h t))))
 
 
 (def app
   (-> (routes arduino-route home-route)
-    wrap-json-params 
-    ))
+    wrap-json-params))
+

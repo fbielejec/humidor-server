@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# upload test readings
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"h" : "65", "t" : "21"}' \
+    http://localhost:8080/arduino
+
+curl -X POST -H "Content-Type: application/json" -d '{"h" : "65", "t" : "21"}' http://localhost:8080/arduino
+

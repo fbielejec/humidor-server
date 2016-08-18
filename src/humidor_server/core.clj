@@ -4,14 +4,30 @@
 
 
 (ns humidor-server.core
-  (:use ring.adapter.jetty)
-  (:require [humidor-server.routes.handler :as handler])
-  (:require [environ.core :refer [env]] )
+  
+  (:require  [ring.adapter.jetty :as container]
+
+             [humidor-server.controller.routes-handler :as routes-handler]
+             
+    )
   (:gen-class))
+
+;(def port
+;  (Integer. (or (System/getenv "PORT") "8080")))
+
+(def application routes-handler/app)
+
+
+(defn start [port]
+  (container/run-jetty application {:port port}))
 
 
 (defn -main
-  "Entry point"
+  "Entry point. Runs the container on the port specified as
+   the first argument or in the PORT global env variable or defaults to 8080"
   [& [port]]
   (let [port (Integer. (or port (env :port) 8080))]
-    (run-jetty #'handler/app {:port port})))
+    (start port)))
+
+
+

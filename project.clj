@@ -13,7 +13,8 @@
                  [ring-json-params "0.1.3"]
                  [clj-json "0.5.3"]
                  [environ "1.0.0"]
-                 
+                 [org.clojure/java.jdbc "0.6.2-alpha2"]
+                 [postgresql/postgresql "9.1-901.jdbc4"]
                  
                  ]
   :main ^:skip-aot humidor-server.core
