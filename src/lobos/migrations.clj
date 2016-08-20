@@ -13,9 +13,9 @@
 (defmigration add-readings-table
   (up [] (create
            (table :readings
-;                  (integer :timestamp :not-null)
-                  (decimal :h :not-null)
-                  (decimal :t :not-null)
+                  (integer :time :not-null)
+                  (double :h :not-null)
+                  (double :t :not-null)
                   )))
   (down [] (drop
              (table :readings))))

@@ -22,23 +22,17 @@
   ) 
   
 
-(defn read-all
-  "Return all rows from the table"
+(defn select-all
+  "Returns a list of all rows from the table"
   []
   (k/select db/readings)
   )
 
 
 (defn insert 
-  "update table inserting a row {:h h :t t}"
-  [h t]
-  ; TODO: add a timestamp to row
-  (let [row {:h h :t t}]
-    
+  "update table by inserting a row of values"
+  [row]
     (k/insert db/readings (k/values row))
-
-
-    )
   )
 
 

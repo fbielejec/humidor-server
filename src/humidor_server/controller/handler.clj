@@ -35,10 +35,11 @@
 (defroutes arduino-route
   ;; route to test arduino connection
   (POST "/arduino" [h t]
-;        (json-response 
-         (database/insert h t)
-         (json-response {:h h :t t} )
-
+        ;; TODO add time
+        (let [row {:h h :t t}]
+          (database/insert row)
+          (json-response row)
+          )
         )
   )
 

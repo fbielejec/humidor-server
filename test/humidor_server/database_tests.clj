@@ -7,6 +7,8 @@
             [lobos.core :as lobos]
             [korma.core :as k]
             [humidor-server.model.db :as db]
+            ; TODO: call f-tions from this ns:
+            [humidor-server.model.database :as database]
             ))
 
 
@@ -19,20 +21,21 @@
   [test-fn]
   (lobos/rollback :all)
   (lobos/migrate)
-  (k/insert db/readings (k/values {:h 65 :t 21}))
+  (database/insert {:time 1 :h 65.0 :t 21.0})
   (test-fn))
+
 
 ; fixture is run for each test
 (use-fixtures :each db-fixture)
+
 
 (deftest database-tests
   
   (testing "Testing db upload"
            
            (is (=
-                 {:h 65 :t 21}
-                 (k/select db/readings)))
-           
+                 {:time 1 :h 65.0 :t 21.0}
+                (first (database/select-all))))
            )
   
   
