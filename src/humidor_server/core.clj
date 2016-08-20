@@ -6,17 +6,26 @@
 (ns humidor-server.core
   
   (:require  [ring.adapter.jetty :as container]
-
+             [environ.core :refer [env]]
              [humidor-server.controller.routes-handler :as routes-handler]
              
     )
   (:gen-class))
 
+
 ;(def port
 ;  (Integer. (or (System/getenv "PORT") "8080")))
 
+
 (def application routes-handler/app)
 
+;(defn init 
+;  "initializes the db and creates the schema if not existing"
+;  []
+;  (println "humidor-server is starting")
+;  (if-not (.exists (java.io.File. "/tmp/database.h2"))
+;    (lobos/create))
+;  )
 
 (defn start [port]
   (container/run-jetty application {:port port}))
@@ -28,6 +37,3 @@
   [& [port]]
   (let [port (Integer. (or port (env :port) 8080))]
     (start port)))
-
-
-

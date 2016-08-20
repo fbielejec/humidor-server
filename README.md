@@ -11,6 +11,12 @@ Backend for the humidor-app. Receives live data from Arduino, stores 30 round-ro
 
 ## Usage
 
+   Deploy db:
+
+   lein repl
+   (use '(lobos connectivity core schema))
+   (migrate)
+
    Dev:
 
    lein run [port]

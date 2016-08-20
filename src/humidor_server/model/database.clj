@@ -2,41 +2,44 @@
 ;;---@fbielejec
 ;;
 
+; H2 and Lobos
+; http://craigglennie.com/programming/clojure/2015/09/07/unit-testing-with-cursive-clojure/
+
+
 (ns humidor-server.model.database
-  (:require [clojure.java.jdbc :as sql]
-            [environ.core :refer [env]]
-            
+  (:require
+            [korma.core :as k]
+            [lobos.core :as lobos] 
+            [humidor-server.model.db :as db] 
             
             ))
 
-; DB
-; https://blog.pivotal.io/labs/labs/adventures-clojure-tdd
-
-; DB testing
-;http://www.lispcast.com/clojure-database-test-faster
-
-(def db
-  (or (System/getenv "DATABASE_URL") "postgresql://localhost:5432/readings"))
 
 
-(def table-name :readings)
 
-;(def db-spec 
-;  {:classname "com.mysql.jdbc.Driver"
-;   :subprotocol "mysql"
-;   :subname "//127.0.0.1:3306/mydb"
-;   :user "myaccount"
-;   :password "secret"})
+(defn create
+  "Creates the database"
+  []
+  (lobos/migrate)
+  ) 
+  
+
+(defn read-all
+  "Return all rows from the table"
+  []
+  (k/select db/readings-table)
+  )
 
 
 (defn insert 
-  "db: database connection string
-   row: {:h h :t t}"
+  "update table inserting a row {:h h :t t}"
   [h t]
+  ; TODO: add a timestamp to row
   (let [row {:h h :t t}]
     
-    (sql/insert! db table-name row )
-    
+    (k/insert db/readings-table (k/values row))
+
+
     )
   )
 

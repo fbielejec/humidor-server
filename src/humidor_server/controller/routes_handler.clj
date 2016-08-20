@@ -3,17 +3,13 @@
 ;;
 
 (ns humidor-server.controller.routes-handler
-  
   (:require [compojure.core :refer [routes defroutes GET POST]]
             [ring.middleware.json :refer [wrap-json-params]]
             [compojure.route :as route]
             [ring.util.response :as response]
             [clj-json.core :as json]
-            
             [humidor-server.model.database :as database]
-            )
-  
-  )
+            ))
 
 
 (def status-codes
