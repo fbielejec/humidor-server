@@ -6,11 +6,11 @@
             ))
 
 ; TODO: read from env
-(def database-file :database-file)
+(def database-file "/tmp/db.h2")
 
 (korma.db/defdb 
   db 
   (korma.db/h2 
     {:db database-file}))
 
-(korma.core/defentity readings-table)
+(korma.core/defentity readings)

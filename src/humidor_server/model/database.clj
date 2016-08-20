@@ -15,8 +15,6 @@
             ))
 
 
-
-
 (defn create
   "Creates the database"
   []
@@ -27,7 +25,7 @@
 (defn read-all
   "Return all rows from the table"
   []
-  (k/select db/readings-table)
+  (k/select db/readings)
   )
 
 
@@ -37,7 +35,7 @@
   ; TODO: add a timestamp to row
   (let [row {:h h :t t}]
     
-    (k/insert db/readings-table (k/values row))
+    (k/insert db/readings (k/values row))
 
 
     )

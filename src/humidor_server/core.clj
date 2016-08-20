@@ -7,7 +7,7 @@
   
   (:require  [ring.adapter.jetty :as container]
              [environ.core :refer [env]]
-             [humidor-server.controller.routes-handler :as routes-handler]
+             [humidor-server.controller.handler :as handler]
              
     )
   (:gen-class))
@@ -17,7 +17,7 @@
 ;  (Integer. (or (System/getenv "PORT") "8080")))
 
 
-(def application routes-handler/app)
+(def application handler/app)
 
 ;(defn init 
 ;  "initializes the db and creates the schema if not existing"

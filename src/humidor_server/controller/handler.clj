@@ -2,7 +2,7 @@
 ;;---@fbielejec
 ;;
 
-(ns humidor-server.controller.routes-handler
+(ns humidor-server.controller.handler
   (:require [compojure.core :refer [routes defroutes GET POST]]
             [ring.middleware.json :refer [wrap-json-params]]
             [compojure.route :as route]
@@ -35,7 +35,12 @@
 (defroutes arduino-route
   ;; route to test arduino connection
   (POST "/arduino" [h t]
-        (json-response (database/insert h t))))
+;        (json-response 
+         (database/insert h t)
+         (json-response {:h h :t t} )
+
+        )
+  )
 
 
 (def app

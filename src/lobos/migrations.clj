@@ -13,7 +13,7 @@
 (defmigration add-readings-table
   (up [] (create
            (table :readings
-                  (integer :timestamp :not-null)
+;                  (integer :timestamp :not-null)
                   (decimal :h :not-null)
                   (decimal :t :not-null)
                   )))

@@ -4,7 +4,7 @@
 
 (ns lobos.config
   (:use lobos.connectivity)
-  (:require [humidor-server.model.database :as database])
+  (:require [humidor-server.model.db :as db])
   )
 
 
@@ -18,7 +18,7 @@
 
 (def db {:classname "org.h2.Driver"
          :subprotocol "h2"
-         :subname database/database-file})
+         :subname db/database-file})
 
 
 (open-global db)
