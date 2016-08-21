@@ -2,7 +2,6 @@
   (:require [korma.db]
             [korma.core]
 ;            [environ.core :refer [env]]
-            
             ))
 
 ; TODO: read from env

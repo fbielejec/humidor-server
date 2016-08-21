@@ -9,6 +9,7 @@
             [ring.util.response :as response]
             [clj-json.core :as json]
             [humidor-server.model.database :as database]
+            [humidor-server.model.time :as t]
             ))
 
 
@@ -35,8 +36,7 @@
 (defroutes arduino-route
   ;; route to test arduino connection
   (POST "/arduino" [h t]
-        ;; TODO add time
-        (let [row {:h h :t t}]
+        (let [row {:time (t/get-now) :h h :t t}]
           (database/insert row)
           (json-response row)
           )
