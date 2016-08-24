@@ -10,19 +10,18 @@ License: LGPL
 Backend for the humidor-app. Receives live data from Arduino, stores 30 round-robin entries in DB.
 
 ## Usage
+   
+   Test:
 
-   Deploy db:
-
-   lein repl
-   (use '(lobos connectivity core schema))
-   (migrate)
+    lein test
 
    Dev:
 
-   lein run [port]
+    lein run [port]
 
-    Production:
-
+   Production:
+    
+    lein install
     $ java -jar humidor-server.jar [port]
 
 ## License
@@ -41,5 +40,5 @@ Copyright © 2016 fbielejec
 
 ## TODO
 
-Test for arduino POST route 
+Round-robin 30 entries for database 
 

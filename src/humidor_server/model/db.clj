@@ -7,6 +7,8 @@
 ; TODO: read from env
 (def database-file "/tmp/db.h2")
 
+(def capacity 30)
+
 (korma.db/defdb 
   db 
   (korma.db/h2 

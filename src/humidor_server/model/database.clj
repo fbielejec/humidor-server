@@ -18,7 +18,17 @@
   []
   (k/select db/readings))
 
+(defn select-count
+  "select count * from readings"
+  []
+  (k/select db/readings  (k/aggregate (count :*)))
+  )
+
+; TODO: implement round-robin db inserts (overwrite first entry when capacity exceeded)
 (defn insert 
   "update table by inserting a row of values"
   [row]
+  
+  (println "Count: " (select-count))
+  
   (k/insert db/readings (k/values row)))
