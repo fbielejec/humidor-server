@@ -41,6 +41,14 @@
           (json-response row)
           )
         )
+  
+    (GET "/arduino" []
+       (try
+         (json-response (database/select-all))
+         (catch Exception e
+           (json-response {"Error" "Cannot retrieve readings from database"} 404)
+           )))
+  
   )
 
 

@@ -39,11 +39,14 @@
 
 (deftest round-insert-tests
   (testing "inserting one more entry than the desired capcity overwrites first element in database"
-           (let [last-value db/capacity]
+           (let [last-value (inc db/capacity)]
              (doall
                (map (fn [x] 
                       (database/insert {:time x :h x :t x})) 
                     (range 0 last-value)))
+             
+             ; insert
+;             (database/insert {:time last-value :h last-value :t last-value})
              
              (let [ first-row (first (database/select-all))]
                (is (=

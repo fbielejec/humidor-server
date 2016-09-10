@@ -21,14 +21,42 @@
 (defn select-count
   "select count * from readings"
   []
-  (k/select db/readings  (k/aggregate (count :*)))
-  )
+  (-> (k/select db/readings
+                (k/aggregate (count :*) :count))
+    (first)
+    (:count)))
+
 
 ; TODO: implement round-robin db inserts (overwrite first entry when capacity exceeded)
 (defn insert 
   "update table by inserting a row of values"
   [row]
+  (if (< (select-count) db/capacity )
+  (k/insert db/readings (k/values row))
+
   
-  (println "Count: " (select-count))
   
-  (k/insert db/readings (k/values row)))
+  (println "else: " (select-count))
+  
+  
+  
+  )
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
